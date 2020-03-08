@@ -102,6 +102,9 @@ def parse_dependencies(gradle_file_tuple):
     default_dependencies = []
     test_dependencies = []
     for line in gradle:
+        line = line.partition('//')[0] # remove any comment starting with "//"
+        line = line.strip()            # remove leading and trailing whitespace
+
         match_scope_test = re.search(regex_scope_test, line)
         if match_scope_test:
             logger.debug(f"Found test scope dependency {match_scope_test.group(1)}")
