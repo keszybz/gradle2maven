@@ -17,12 +17,12 @@ regex_scope_default = re.compile(r"compile (.+)$")
 
 # Gradle also allows a sub-module to depend on another submodule with "compile project", but that should
 # also just result in a default-scope <dependency> in our pom
-regex_project = re.compile(r"project\(':(.*)'\)")
+regex_project = re.compile(r'''project\(['"]:(.*)['"]\)''')
 
 # Some dependencies have versions, some don't (they're delegated to a parent).  Support either case.  I wrote
 # this out as 1 big ass regex but it made my head hurt, so I'm splitting it up to improve readability/debugging
-regex_version = re.compile(r"group:\s*'(.+)'\s*,\s*name:\s*'(.+)'\s*,\s*version:\s*'(.+)'")
-regex_no_version = re.compile(r"group:\s*'(.+)'\s*,\s*name:\s*'(.+)'\s*")
+regex_version = re.compile(r'''group:\s*['"](.+)['"]\s*,\s*name:\s*['"](.+)['"]\s*,\s*version:\s*['"](.+)['"]''')
+regex_no_version = re.compile(r'''group:\s*['"](.+)['"]\s*,\s*name:\s*['"](.+)['"]\s*''')
 
 # =====================================================================================================================
 
