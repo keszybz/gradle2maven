@@ -1,6 +1,6 @@
 import logging
 import re
-from g2m_util import namespace, get_module_name, load_file
+from g2m_util import namespace, get_module_name, load_file, indent_child
 from lxml import etree
 
 logger = logging.getLogger()
@@ -81,6 +81,7 @@ def create_submodule_pom(group_id, artifact, artifact_version, gradle_file_tuple
     for td in test_dependencies:
         dependencies.append(make_dependency_element(td, 'test'))
 
+    indent_child(dependencies, level=1, last=True)
     return pom
 
 

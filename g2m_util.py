@@ -63,3 +63,16 @@ def get_module_name(path_file_tuple):
     """
     submodule_name = os.path.split(path_file_tuple[0])
     return submodule_name[1]
+
+def indent_child(elem, level=0, last=False):
+    i = '\n' + 4*level*' '
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + 4*' '
+        if level > 0 and (not elem.tail or not elem.tail.strip()):
+            elem.tail = '\n' + 4*(level-last)*' '
+        for child in elem:
+            indent_child(child, level+1, child == elem[-1])
+    else:
+        if level > 0 and (not elem.tail or not elem.tail.strip()):
+            elem.tail = '\n' + 4*(level-last)*' '

@@ -1,6 +1,10 @@
 import logging
 import re
-from g2m_util import load_file, get_root_level_gradle_file, namespace, get_module_element
+from g2m_util import (load_file,
+                      get_root_level_gradle_file,
+                      namespace,
+                      get_module_element,
+                      indent_child)
 from lxml import etree
 
 logger = logging.getLogger()
@@ -79,6 +83,7 @@ def create_root_level_pom(group_id, artifact, artifact_version, gradle_files):
             logging.debug(f"Adding new_module {new_module.text}")
             modules.append(new_module)
 
+    indent_child(modules, level=1)
     return pom
 
 
